@@ -7,12 +7,21 @@ jobs:
   build:
     docker:
       # the base image can run most needed actions with orbs
-      - image: "cimg/base:stable"
+      - image: 'cimg/base:stable'
     steps:
       - node/install
       - checkout
       # install dependencies in both apps
-      - run:
-          name: hello
-          command: |
-            echo "hello-world"
+      - run: 'npm run frontend:build'
+      - run: 'npm run backend:build'
+  install:
+    docker:
+      - image: 'cimg/base:stable'
+      - steps:
+      - run: 'npm run frontend:install'
+      - run: 'npm run backend:install'
+workflow:
+  react-pipeline-workflow:
+    jobs:
+      - install
+      - build
