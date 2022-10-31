@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run: 'npm run frontend:install'
       - run: 'npm run backend:install'
-workflow:
+workflows:
   react-pipeline-workflow:
     jobs:
       - install
